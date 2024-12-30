@@ -1,0 +1,61 @@
+.api-setting .api-info {
+    background: #eef2f4;
+    border: 1px solid #dbe3e7;
+    border-radius: 2px;
+    display: flex;
+    font-size: .9em;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 8px 10px 6px
+}
+.api-setting .item{
+    padding-top: 10px;
+}
+.api-setting .api-info code, .api-setting .api-info pre {
+    background: #f7f9fa;
+    border: 1px solid #dbe3e7;
+    border-radius: 2px;
+    font-family: "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    overflow: auto;
+    padding: 5px;
+    width: 100%;
+    word-wrap: break-word;
+}
+.api-setting  h5, .api-setting  h6{
+    font-weight: bold;
+}
+.api-setting  h5 {
+    font-size: 1em;
+}
+.api-setting .desc p{
+    margin-top: 10px;
+}
+.api-setting ul li{
+    padding: 5px;
+}
+.api-setting .request{
+    margin-left: 50px;
+    padding-bottom: 5px;
+}
+.api-setting table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+.api-setting table thead{
+    background: #5a626b;
+    color: #ffffff;
+}
+.api-setting table thead th{
+    padding: 10px;
+}
+.api-setting table tbody td{
+    border-right: 1px solid #5a626b;
+    border-bottom: 1px solid #5a626b;
+    padding: 5px;
+}
+.api-setting table tbody td:last-child{
+    border-right: none;
+}

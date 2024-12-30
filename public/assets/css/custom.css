@@ -1,0 +1,163 @@
+[data-error] li{
+    color: #fc564a !important;
+}
+.border-right{
+    border-right: 1px solid var(--recent-dashed-border);
+}
+.w-\[8\%\]{
+    width: 8%;
+}
+.w-\[9\%\]{
+    width: 9%;
+}
+.w-\[10\%\]{
+    width: 10%;
+}
+.w-40{
+    width: 40%;
+}
+.w-60{
+    width: 60%;
+}
+.textarea{
+    height: 400px;
+}
+.text-left {
+    text-align: left;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .text-start {
+    text-align: start;
+  }
+  
+  .text-end {
+    text-align: end;
+  }
+  .leasing-filter{
+    padding-right:0px;
+}
+.leasing-filter input[type='radio'], .dropdown-wrapper{
+    display: none;
+}
+.leasing-filter label{
+    padding: 8px;
+    margin: 0px;
+    cursor: pointer;
+    background-color: #0a8cf0;
+    color: #fff;
+    border-radius: 5px;
+}
+.leasing-filter input[type='radio']:checked+label{
+    background-color: rgb(55, 160, 0);
+}
+.pac-container{
+    z-index: 1100
+}
+.show_trip_vehicle {
+    width: 53%;
+}
+.show_trip_vehicle select{
+    font-size: 0.8rem;
+}
+[data-refresh]{
+    padding: 0.5rem;
+}
+#map{
+    height: 100% !important;
+    padding-bottom: 50%;
+    position: relative;
+    width: 100%;
+}
+.chart-legend{
+    height: 200px;
+    overflow-y: auto;
+}
+.scrollbar
+{
+    max-height: 210px;
+    overflow-y: auto;
+}
+.scrollbar::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+.scrollbar::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+.scrollbar::-webkit-scrollbar-thumb
+{
+    background-color: #000000;
+}
+.vehicle-type {
+    position: absolute;
+    z-index: 2;
+    top: 10px;
+    left: 10px;
+    width: 25%;
+}
+/*-- dashboard vehicle lists --*/
+.chart-legend-item {
+    padding-left: 22px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 7px;
+}
+.chart-legend-item p{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    float: left;
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.chart-legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #e4e4e4;
+}
+
+.chart-legend-color.kelly-green {
+    background-color: #37A000;
+}
+
+.chart-legend-color.kelly-green2 {
+    background-color: #42b704;
+}
+
+.chart-legend-color.whisper {
+    background-color: #E4E4E4;
+}
+
+.chart-legend-item .percentage {
+    float: right;
+}
+.page-link{
+    padding: 3px 10px;
+    margin: 5px;
+    font-size: 13px;
+}
+.message li {
+    color: #fff;
+}
+@media (min-width: 1350px) {
+    .chart-legend-item p {
+        font-size: 13px;
+    }
+}
