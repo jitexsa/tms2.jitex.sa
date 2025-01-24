@@ -129,12 +129,23 @@ if(!function_exists('setCss')) {
     {
         if ($files) {
             foreach ($files as $file) {
+                $file .= '.css';
+                $filePath = public_path(ltrim(env('ASSETS_CSS'), '/') . '/' . $file);
+                $fileUrl = rtrim(env('APP_URL'), '/') . '/' . ltrim(env('ASSETS_CSS'), '/') . '/' . $file . '?v=' . env('VERSION');
+
+                if (file_exists($filePath)) {
+                    echo '<link rel="stylesheet" type="text/css" href="' . $fileUrl . '" rel=preload>';
+                } else {
+                    error_log('CSS file not found: ' . $filePath);
+                }
+            }
+            /*foreach ($files as $file) {
                 $file = $file.'.css';
                 $is_file = str_replace(env('APP_URL'), 'public', env('ASSETS_CSS') . '/' .$file);
                 if(file_exists($is_file)){
                     echo '<link rel="stylesheet" type="text/css" href="' .env('ASSETS_CSS').'/' . $file . '?v=' .env('VERSION') . '" rel=preload>';
                 }
-            }
+            }*/
         }
     }
 }
@@ -148,12 +159,23 @@ if(!function_exists('setJs')) {
     {
         if ($files) {
             foreach ($files as $file) {
+                $file .= '.js';
+                $filePath = public_path(ltrim(env('ASSETS_JS'), '/') . '/' . $file);
+                $fileUrl = rtrim(env('APP_URL'), '/') . '/' . ltrim(env('ASSETS_JS'), '/') . '/' . $file . '?v=' . env('VERSION');
+
+                if (file_exists($filePath)) {
+                    echo '<script src="' . $fileUrl . '" rel="preload"></script>';
+                } else {
+                    error_log('JS file not found: ' . $filePath);
+                }
+            }
+            /*foreach ($files as $file) {
                 $file = $file.'.js';
                 $is_file = str_replace(env('APP_URL'), 'public', env('ASSETS_JS') . '/' .$file);
                 if(file_exists($is_file)){
                     echo  '<script src="' .env('ASSETS_JS').'/'. $file . '?v=' . env('VERSION'). '" rel=preload></script>';
                 }
-            }
+            }*/
         }
     }
 }
@@ -301,14 +323,14 @@ if(!function_exists('getCountry')){
 
 
 /**
- * get company list 
+ * get company list
  * @param workspace_id
  * @param type
  */
 if(!function_exists('getCompany')){
 
     function getCompany($workspace_id = '', $type= 'workspace_id'){
-      
+
         if($type == 'workspace_id') {
            $query = Company::where('workspace_id', ($workspace_id) ? $workspace_id : Auth::user()->workspace_id);
             if(Auth::user()->company_id){
@@ -394,7 +416,7 @@ if(!function_exists('vendorCategory')) {
 }
 
 /**
- * getVehicleMaker 
+ * getVehicleMaker
  */
 if(!function_exists('getVehicleMaker')){
     function getVehicleMaker(){
@@ -522,7 +544,7 @@ if(! function_exists('smsShortcode')){
      'a.location_map as loading_map', 'a.place_id as loading_place_id',
      'b.location as delivery', 'b.location_map as delivery_map', 'b.place_id as delivery_place_id',
      'vehicles.licence_plate_no', 'vehicles.truck_image', 'users.firstname', 'users.lastname',
-     'customers.customer_name', 'vehicle_types.type_name', 'c.name as scope_name', 
+     'customers.customer_name', 'vehicle_types.type_name', 'c.name as scope_name',
      'workspace.workspace_name', 'r.name as request_name', 'divisions.division_name',
      'sub_contractors.transporter_name')
      ->leftJoin('drivers','drivers.id', '=', 'trips.driver')
@@ -558,7 +580,7 @@ if(! function_exists('smsShortcode')){
 
  /**
   * get vehicle list by workspace / company id
-  * skip vehicle true / false 
+  * skip vehicle true / false
   * vehicle id which we want to skip
   */
  if(!function_exists('getVehicle')) {
@@ -617,7 +639,7 @@ if(!function_exists('getVehicleType')){
      * get contractor status by workspace
       */
 if(!function_exists('contractorStatus')) {
-   
+
     function contractorStatus()
     {
         return ContractorStatus::whereIn('workspace_id',array(1,Auth::user()->workspace_id))->get();
@@ -643,7 +665,7 @@ if(!function_exists('linkWithTrip')) {
         return Vehicle::select('trips.trip_date', 'trips.waybill_no', 'trips.job_no')
         ->join('trips', 'trips.vehicle', '=', 'vehicles.id')
         ->where('vehicles.subcontractor',$subcontractor_id)->get();
-       
+
     }
 }
 
@@ -784,7 +806,7 @@ if(!function_exists('getVehicleDriver')){
 }
 
 /**
- * get company vehicles by workspace, company and skip used vehicle 
+ * get company vehicles by workspace, company and skip used vehicle
  */
 if(!function_exists('getCompanyVehicles')){
     function getCompanyVehicles($workspace_id, $not_skip = 0){
@@ -878,9 +900,9 @@ if(!function_exists('fuelType')){
 if(!function_exists('tripStatusStats')) {
     function tripStatusStats()
     {
-        $rec = TripStatus::select("trip_statuses.name,  
-        (select COUNT(trips.id) from trips where trips.status = trip_statuses.id 
-         and trips.is_delete = 0 and trips.workspace_id = ".Auth::user()->workspace_id.") 
+        $rec = TripStatus::select("trip_statuses.name,
+        (select COUNT(trips.id) from trips where trips.status = trip_statuses.id
+         and trips.is_delete = 0 and trips.workspace_id = ".Auth::user()->workspace_id.")
          as status_count")
          ->where('workspace_id', array(1,Auth::user()->workspace_id))
          ->get();
@@ -1172,7 +1194,7 @@ if(!function_exists('getTrackingInfo')){
 
 if(!function_exists('externalVehicleTracking')){
     function externalVehicleTracking($vehicle_type = 0){
-       $trips = Trip::select('trips.id', 'trips.waybill_no', 'trip_live_trackings.lat', 'trip_live_trackings.lng', 
+       $trips = Trip::select('trips.id', 'trips.waybill_no', 'trip_live_trackings.lat', 'trip_live_trackings.lng',
         'vehicles.licence_plate_no', 'vehicles.display_name', 'drivers.driver_name',  'drivers.mobile',
          'vehicle_types.type_name', 'trip_live_trackings.created_at')
         ->join('trip_live_trackings', 'trip_live_trackings.trip_id', '=', 'trips.id')
